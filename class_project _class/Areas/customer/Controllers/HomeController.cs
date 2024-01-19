@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Project_model;
 using System.Diagnostics;
 
-namespace class_project__class.Controllers
+namespace class_project__class.Areas.customer.Controllers
 {
+    [Area("customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

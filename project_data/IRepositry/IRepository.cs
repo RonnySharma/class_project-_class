@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace project_data.IRepositry
 {
-   public interface IRepositry<T> where T : class
+   public interface IRepository<T> where T : class
     {
         void Add(T entity); //save
         void Remove(T entity);//Delete
