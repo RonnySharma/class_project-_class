@@ -12,5 +12,6 @@ namespace project_data
         {
         }
         public DbSet<Category>Categories { get; set; }  
+        public DbSet<covertype> Covertypes { get; set; }  
     }
 }
