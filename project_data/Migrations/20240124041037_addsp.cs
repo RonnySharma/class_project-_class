@@ -4,7 +4,7 @@
 
 namespace project_data.Migrations
 {
-    public partial class addstor : Migration
+    public partial class addsp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,7 @@ namespace project_data.Migrations
                       @id int
                        AS
                        delete  from Covertypes where id=@id");
+
 
 
         }

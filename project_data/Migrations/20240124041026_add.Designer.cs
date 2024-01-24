@@ -12,8 +12,8 @@ using project_data;
 namespace project_data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240122043014_covertype")]
-    partial class covertype
+    [Migration("20240124041026_add")]
+    partial class add
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -243,7 +243,7 @@ namespace project_data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Project_model.covertype", b =>
+            modelBuilder.Entity("Project_model.Covertype", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

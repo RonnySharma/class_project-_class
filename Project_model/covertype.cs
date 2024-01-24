@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_model
 {
-  public class covertype
+  public class Covertype
     {
         public int Id { get; set; }
         [Required]

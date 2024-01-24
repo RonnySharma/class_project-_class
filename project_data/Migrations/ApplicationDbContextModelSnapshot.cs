@@ -241,7 +241,7 @@ namespace project_data.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Project_model.covertype", b =>
+            modelBuilder.Entity("Project_model.Covertype", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

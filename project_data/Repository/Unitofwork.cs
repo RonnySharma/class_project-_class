@@ -17,10 +17,13 @@ namespace project_data.Repository
             _context = context;
 
             Category = new categoryRepostry(_context);
-
+            Covertype = new CovertyprRepository(_context);
+            spcall = new spcall(_context);
         }
 
         public IcategoryRepostry Category {  get;  private  set; }
+        public ICovertype Covertype { get; private set; }
+        public Ispcall spcall { get; private set; }
 
         public void save()
         {

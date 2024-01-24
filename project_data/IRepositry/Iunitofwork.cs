@@ -10,6 +10,8 @@ namespace project_data.IRepositry
 
     {
         IcategoryRepostry Category { get; }
+        ICovertype Covertype { get; }
+        Ispcall spcall { get; } 
 
         void save();
     }
