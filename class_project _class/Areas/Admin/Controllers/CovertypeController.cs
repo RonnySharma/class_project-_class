@@ -30,6 +30,8 @@ namespace class_project__class.Areas.Admin.Controllers
             if (covertype == null) return NotFound();
             return View(covertype);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult upsert(Covertype covertype)
         { if (covertype == null) return NotFound();
         if(!ModelState.IsValid) return View(covertype);
@@ -46,5 +48,33 @@ namespace class_project__class.Areas.Admin.Controllers
             }
             return View(covertype);
         }
+        #region APIs
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            return Json(new { data = _unitofwork.spcall.List<Covertype>(SD.proc_getcovertype) });
+            // return Json(new { data = _unitfowork.Covertype.Getall() });
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var parm = new DynamicParameters();
+            parm.Add("@id", id);
+            var coer = _unitofwork.spcall.oneRecord<Covertype>(SD.proc_getcovertypes, parm);
+            //  var cat = _unitfowork.Covertype.get(id);
+            if (parm == null) return Json(new
+            {
+                success = false,
+                message = "Something went !!!"
+            });
+            //   _unitfowork.Covertype.Remove(cat);
+            //_unitfowork.save();
+            _unitofwork.spcall.excecute(SD.proc_DeleteCoverTypes, parm);
+
+            return Json(new { success = true, message = "data is delete sucaee" });
+
+        }
+        #endregion
+
     }
 }

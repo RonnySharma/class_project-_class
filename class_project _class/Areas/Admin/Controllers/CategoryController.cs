@@ -2,7 +2,9 @@
 using Microsoft.CodeAnalysis.Host.Mef;
 
 using project_data.IRepositry;
+using project_data.Repository;
 using Project_model;
+using Projrct_unite;
 
 namespace projevt_class_ecom.Areas.Admin.Controllers
 {
@@ -25,8 +27,7 @@ namespace projevt_class_ecom.Areas.Admin.Controllers
             var categoryList = _unitofwork.Category.Getall();
             return Json(new { data = categoryList });
         }
-
-
+   
 
         [HttpDelete]
         public IActionResult Delete(int id)
