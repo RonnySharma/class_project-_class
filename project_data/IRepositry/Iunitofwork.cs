@@ -12,6 +12,7 @@ namespace project_data.IRepositry
         IcategoryRepostry Category { get; }
         ICovertype Covertype { get; }
         Ispcall spcall { get; } 
+        IProductRepostry Product { get; }
 
         void save();
     }

@@ -19,11 +19,13 @@ namespace project_data.Repository
             Category = new categoryRepostry(_context);
             Covertype = new CovertyprRepository(_context);
             spcall = new spcall(_context);
+             Product =new ProductRepository (_context);
         }
 
         public IcategoryRepostry Category {  get;  private  set; }
         public ICovertype Covertype { get; private set; }
         public Ispcall spcall { get; private set; }
+        public IProductRepostry Product { get; private set; }
 
         public void save()
         {

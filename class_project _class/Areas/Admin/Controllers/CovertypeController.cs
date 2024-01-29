@@ -46,7 +46,7 @@ namespace class_project__class.Areas.Admin.Controllers
                 _unitofwork.spcall.excecute(SD.proc_updateCoverType, ms);
                 _unitofwork.save();
             }
-            return View(covertype);
+            return RedirectToAction("Index");
         }
         #region APIs
         [HttpGet]
