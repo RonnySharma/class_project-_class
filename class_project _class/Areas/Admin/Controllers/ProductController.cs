@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using project_data.IRepositry;
+using Project_model;
 using Project_model.ViewModels;
 
 namespace class_project__class.Areas.Admin.Controllers
@@ -16,12 +18,26 @@ namespace class_project__class.Areas.Admin.Controllers
         {
             return View();
         }
-        public IActionResult upsert()
-        { ProductVM productVM = new ProductVM();
+        public IActionResult upsert(int? id)
+        { ProductVM productVM = new ProductVM()
+        {
+            Product = new Product(),
+            catalist = _unitofwork.Category.Getall().Select(cl => new SelectListItem()
             {
-                //po
-            };
-            return View();
+                Text = cl.Name,
+                Value = cl.Id.ToString()
+            }),
+            covertypeList = _unitofwork.Covertype.Getall().Select(ct => new SelectListItem()
+            {
+                Text = ct.Name,
+                Value = ct.Id.ToString()
+            })
+
+        };
+            if (id == null) return View(productVM);
+            productVM.Product=_unitofwork.Product.get(id.GetValueOrDefault());
+
+            return View(productVM);
         }
     }
 }

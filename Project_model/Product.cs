@@ -35,6 +35,7 @@ namespace Project_model
         public double Price100 { get; set; }
         [Display(Name = "ImgeUrl")]
         public string ImgeUrl { get; set; }
+        public int Prdqty { get; set; }
         [Required]
         [Display(Name = "catagory")]
         public int catagoryId { get; set; }
