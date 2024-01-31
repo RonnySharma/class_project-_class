@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Projrct_unite\Projrct_unite.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\Product\" />
+  </ItemGroup>
+
 </Project>

@@ -10,7 +10,7 @@ namespace Project_model.ViewModels
       public class ProductVM
     {
         public Product Product { get; set; }
-        public IEnumerable<SelectListItem> catalist { get; set; }
+        public IEnumerable<SelectListItem> CategoryList { get; set; }
         public IEnumerable<SelectListItem> covertypeList { get; set; }
     }
 }
