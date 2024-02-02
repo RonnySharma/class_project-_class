@@ -266,14 +266,14 @@ namespace project_data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Author")
+                    b.Property<string>("Authors")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CovertypeId")
+                    b.Property<int>("CoverTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -284,7 +284,7 @@ namespace project_data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImgeUrl")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -304,15 +304,11 @@ namespace project_data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("publisher")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CovertypeId");
+                    b.HasIndex("CoverTypeId");
 
                     b.ToTable("Products");
                 });
@@ -370,21 +366,21 @@ namespace project_data.Migrations
 
             modelBuilder.Entity("Project_model.Product", b =>
                 {
-                    b.HasOne("Project_model.Category", "Catagory")
+                    b.HasOne("Project_model.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Project_model.Covertype", "Covertype")
+                    b.HasOne("Project_model.Covertype", "CoverType")
                         .WithMany()
-                        .HasForeignKey("CovertypeId")
+                        .HasForeignKey("CoverTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Catagory");
+                    b.Navigation("Category");
 
-                    b.Navigation("Covertype");
+                    b.Navigation("CoverType");
                 });
 #pragma warning restore 612, 618
         }

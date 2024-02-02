@@ -21,6 +21,38 @@ namespace class_project__class.Areas.Admin.Controllers
         {
             return View();
         }
+        #region APIs
+        public IActionResult Getall()
+        {
+            var mohi = _unitofwork.Product.Getall();
+            return Json(new { data = mohi });
+
+        }
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var cat = _unitofwork.Product.get(id);
+            if (cat == null) return Json(new
+            {
+                success = false,
+                message = "Something went !!!"
+            });
+            var wabRootPath = _webHostEnvironment.WebRootPath;
+            var imgePath = Path.Combine(wabRootPath, cat.ImageUrl.Trim('\\'));
+            if (System.IO.File.Exists(imgePath))
+            {
+                System.IO.File.Exists(imgePath);
+            }
+            _unitofwork.Product.Remove(cat);
+            _unitofwork.save();
+            return Json(new
+            {
+                success = true,
+                Message = "Finally DATA delete"
+            });
+        }
+        #endregion
+   
         public IActionResult upsert(int? id)
         { ProductVM productVM = new ProductVM()
         {
@@ -58,12 +90,12 @@ namespace class_project__class.Areas.Admin.Controllers
                     var uploads = Path.Combine(mo, @"Image\Product");
                     if (productVM.Product.Id != 0)
                     {
-                        var ImagerExists = _unitofwork.Product.get(productVM.Product.Id).ImgeUrl;
-                        productVM.Product.ImgeUrl = ImagerExists;
+                        var ImagerExists = _unitofwork.Product.get(productVM.Product.Id).ImageUrl;
+                        productVM.Product.ImageUrl = ImagerExists;
                     }
-                    if (productVM.Product.ImgeUrl != null)
+                    if (productVM.Product.ImageUrl != null)
                     {
-                        var imagepath = Path.Combine(mo, productVM.Product.ImgeUrl.Trim('\\'));
+                        var imagepath = Path.Combine(mo, productVM.Product.ImageUrl.Trim('\\'));
                         if (System.IO.File.Exists(imagepath))
                         {
                             System.IO.File.Delete(imagepath);
@@ -73,20 +105,21 @@ namespace class_project__class.Areas.Admin.Controllers
                     {
                         f[0].CopyTo(filestream);
                     }
-                    productVM.Product.ImgeUrl = @"\Image\Product\" + filename + extension;
+                    productVM.Product.ImageUrl = @"\Image\Product\" + filename + extension;
                 }
                 else
                 {
                     if (productVM.Product.Id != 0)
                     {
-                        var imageexists = _unitofwork.Product.get(productVM.Product.Id).ImgeUrl;
-                        productVM.Product.ImgeUrl = imageexists;
+                        var imageexists = _unitofwork.Product.get(productVM.Product.Id).ImageUrl;
+                        productVM.Product.ImageUrl = imageexists;
                     }
                 }
                 if(productVM.Product.Id==0)
                     _unitofwork.Product.Add(productVM.Product);
                 else
                 
+
                     _unitofwork.Product.update(productVM.Product);
                     _unitofwork.save();
                     return RedirectToAction("Index");

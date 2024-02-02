@@ -24,11 +24,11 @@
             </div>
             <div class="form-group row p-2">
                 <div class="col-md-3">
-                    <label asp-for="Product.Author"></label>
+                    <label asp-for="Product.Authors"></label>
                 </div>
                 <div class="col">
-                    <input asp-for="Product.Author" class="form-control" />
-                    <span asp-validation-for="Product.Author" class="text-danger"></span>
+                    <input asp-for="Product.Authors" class="form-control" />
+                    <span asp-validation-for="Product.Authors" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row p-2 ">
@@ -69,15 +69,6 @@
             </div>
             <div class="form-group row p-2">
                 <div class="col-md-3">
-                    <label asp-for="Product.publisher"></label>
-                </div>
-                <div class="col">
-                    <input asp-for="Product.publisher" class="form-control" />
-                    <span asp-validation-for="Product.publisher" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row p-2">
-                <div class="col-md-3">
                     <label asp-for="Product.Price50"></label>
                 </div>
                 <div class="col">
@@ -108,14 +99,14 @@
                     <label asp-for="Product.CategoryId"></label>
                 </div>
                 <div class="col">
-                    @Html.DropDownListFor(m => Model.Product.CovertypeId, Model.covertypeList, "select Cover Type", new { @class = "form-control" })
-                    <span asp-validation-for="Product.CovertypeId" class="text-danger"></span>
+                    @Html.DropDownListFor(m => Model.Product.CoverTypeId, Model.covertypeList, "select Cover Type", new { @class = "form-control" })
+                    <span asp-validation-for="Product.CoverTypeId" class="text-danger"></span>
                 </div>
 
             </div>
             <div class="form-group row p-2">
                 <div class="col-md-3">
-                    <label asp-for="Product.ImgeUrl"></label>
+                    <label asp-for="Product.ImageUrl"></label>
                 </div>
                 <div class="col">
                     <input type="file" name="files" id="uploadBox" class="form-control" />
@@ -147,7 +138,7 @@
     <div class="col-md-5">
         @if (Model.Product.Id != 0)
         {
-            <img src="@Model.Product.ImgeUrl" class="rounded-bottom" width="100" height="100" />
+            <img src="@Model.Product.ImageUrl" class="rounded-bottom" width="100" height="100" />
         }
 
     </div>

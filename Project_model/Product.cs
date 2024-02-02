@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,42 +8,37 @@ using System.Threading.Tasks;
 
 namespace Project_model
 {
-   public class Product
+    public class Product
     {
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
-        public string Author { get; set; }
-        [Required]
-        public string publisher { get; set; }
-        [Required]
         public string Description { get; set; }
         [Required]
         public string ISBN { get; set; }
-
+        public string Authors { get; set; }
         [Required]
-        [Range(0, 1000)]
+        [Range(1, 10000)]
         public double ListPrice { get; set; }
         [Required]
-        [Range(0, 1000)]
-        public double Price { get; set; }
-        [Required]
-        [Range(0, 1000)]
+        [Range(1, 10000)]
         public double Price50 { get; set; }
         [Required]
-        [Range(0, 1000)]
+        [Range(1, 10000)]
         public double Price100 { get; set; }
-        [Display(Name = "ImgeUrl")]
-        public string ImgeUrl { get; set; }
-       
         [Required]
-        [Display(Name = "catagory")]
+        [Range(1, 10000)]
+        public double Price { get; set; }
+        [Display(Name = "Image Url")]
+        public string ImageUrl { get; set; }
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
-        public Category Catagory { get; set; }
-        [Required]
-        [Display(Name = "covertype")]
-        public int CovertypeId { get; set; }
-        public Covertype Covertype { get; set; }
+        public Category Category { get; set; }
+        [Display(Name = "Cover Type")]
+        public int CoverTypeId { get; set; }
+        public Covertype CoverType { get; set; }
+
+
     }
 }

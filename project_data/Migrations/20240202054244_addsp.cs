@@ -33,9 +33,6 @@ namespace project_data.Migrations
                       @id int
                        AS
                        delete  from Covertypes where id=@id");
-
-
-
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

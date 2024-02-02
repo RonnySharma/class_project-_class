@@ -25,13 +25,13 @@ function loadDataTable() {
 }
 function Delete(url) {
     swal({
-        title: "Want to delete?",
+        title: "Want to delete data ?",
         text: "Delete Information",
-        button: true,
+        buttons: true,
         icon: "warning",
-        dangerMode: true // Corrected 'dangerModel' to 'dangerMode'
+        dangermodel: true
     }).then((willDelete) => {
-        if (willDelete) { // Corrected 'WillDelete' to 'willDelete'
+        if (willDelete) {
             $.ajax({
                 url: url,
                 type: "DELETE",
@@ -39,11 +39,12 @@ function Delete(url) {
                     if (data.success) {
                         toastr.success(data.message);
                         dataTable.ajax.reload();
-                    } else {
+                    }
+                    else {
                         toastr.error(data.message);
                     }
                 }
-            });
+            })
         }
-    });
+    })
 }
