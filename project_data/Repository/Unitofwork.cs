@@ -20,12 +20,19 @@ namespace project_data.Repository
             Covertype = new CovertyprRepository(_context);
             spcall = new spcall(_context);
              Product =new ProductRepository (_context);
+            Company = new CompanyRepositry(_context);
+            OrderHeader = new OrderheaderRepository(_context);
+          
         }
 
         public IcategoryRepostry Category {  get;  private  set; }
         public ICovertype Covertype { get; private set; }
         public Ispcall spcall { get; private set; }
         public IProductRepostry Product { get; private set; }
+
+        public ICompany Company { get; private set; }
+
+        public IOrderHeader OrderHeader { get; private set; }
 
         public void save()
         {

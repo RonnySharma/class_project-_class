@@ -13,6 +13,8 @@ namespace project_data.IRepositry
         ICovertype Covertype { get; }
         Ispcall spcall { get; } 
         IProductRepostry Product { get; }
+        ICompany Company { get; }
+        IOrderHeader OrderHeader { get; }
 
         void save();
     }
