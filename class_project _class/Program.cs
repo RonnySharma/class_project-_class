@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using project_data;
 using project_data.IRepositry;
 using project_data.Repository;
+using class_project__class.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

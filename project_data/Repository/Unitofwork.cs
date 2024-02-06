@@ -22,7 +22,11 @@ namespace project_data.Repository
              Product =new ProductRepository (_context);
             Company = new CompanyRepositry(_context);
             OrderHeader = new OrderheaderRepository(_context);
-          
+            OrderDetail =new OrderDetailRepository(_context);
+            ApplicationUser =new ApplicationUserRepository(_context);
+            ShoppingCart =new ShoppingCartRepository(_context);
+
+
         }
 
         public IcategoryRepostry Category {  get;  private  set; }
@@ -33,6 +37,12 @@ namespace project_data.Repository
         public ICompany Company { get; private set; }
 
         public IOrderHeader OrderHeader { get; private set; }
+
+        public IOrderDetailRepository OrderDetail { get; private set; }
+
+        public IApplicationUserRepository ApplicationUser { get; private set; }
+
+        public IShoppingCartRepository ShoppingCart { get; private set; }
 
         public void save()
         {

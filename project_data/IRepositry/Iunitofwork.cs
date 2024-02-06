@@ -15,7 +15,9 @@ namespace project_data.IRepositry
         IProductRepostry Product { get; }
         ICompany Company { get; }
         IOrderHeader OrderHeader { get; }
-
+        IOrderDetailRepository OrderDetail { get; }
+        IApplicationUserRepository ApplicationUser { get; }
+        IShoppingCartRepository ShoppingCart { get; }
         void save();
     }
 }
