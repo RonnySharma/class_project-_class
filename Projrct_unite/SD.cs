@@ -13,5 +13,10 @@ namespace Projrct_unite
         public const string proc_CreateCoverType = "covertytre";
         public const string proc_updateCoverType = "updateCoverType";
         public const string proc_DeleteCoverTypes = "DeleteCoverTypes";
+        //rolles
+        public const string Role_Admin = "Admin";
+        public const string Role_Employee = "Employee";
+        public const string Role_Company = "company";
+        public const string Role_Individual = "Individual";
     }
 }

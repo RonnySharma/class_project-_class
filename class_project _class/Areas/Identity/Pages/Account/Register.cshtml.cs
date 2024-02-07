@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -16,8 +17,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using project_data.IRepositry;
+using Project_model;
+using Projrct_unite;
 
 namespace class_project__class.Areas.Identity.Pages.Account
 {
@@ -28,21 +33,28 @@ namespace class_project__class.Areas.Identity.Pages.Account
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        //private readonly IEmailSender _emailSender;
+        private readonly Iunitofwork _unitofwork;
+        private readonly RoleManager<IdentityRole> _roleManager;
+      
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            //IEmailSender emailSender,
+            Iunitofwork unitofwork,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _unitofwork = unitofwork;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            //_emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -97,11 +109,35 @@ namespace class_project__class.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+           
+            public string Name { get; set; }
+            [Display(Name = "street Address")]
+            public string streetaddress { get; set; }
+            public string city { get; set; }
+            public string phoneno { get; set; }
+            public string state { get; set; }
+            [Display(Name = "Postal code")]
+            public string Postalcode { get; set; }
+            [Display(Name = "company")]
+            public int? CompanyId { get; set; }
+           
+            public Company Company { get; set; }
+            [NotMapped]
+            public string Role { get; set; }
+            public IEnumerable<SelectListItem> companyLIst { get; set; }
+            public IEnumerable<SelectListItem> RolEist { get; set; }
+
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            Input = new InputModel()
+                {
+            companyLIst=_unitofwork.Company.Getall().Select(m=>new SelectListItem() { Text = m.Name, Value = m.Id.ToString() }),
+            RolEist=_roleManager.Roles.Where(r=>r.Name!=SD.Role_Admin).Where(r=>r.Name!=SD.Role_Individual).Select(r => r.Name).Select(rl => new SelectListItem() { Text = rl, Value = rl })
+            };
+             
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -112,6 +148,7 @@ namespace class_project__class.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
