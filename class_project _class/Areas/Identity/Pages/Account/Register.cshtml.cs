@@ -149,16 +149,64 @@ namespace class_project__class.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
 
-                var user = CreateUser();
+                ///var user = CreateUser();
+                var user = new ApplicationUser()
+                {
+                    Name=Input.Name,
+                    Email =Input.Email,
+                    UserName=Input.Email,
+                    streetAddress= Input.streetaddress,
+                    city=Input.city,
+                    state=Input.state, 
+                    PhoneNumber=Input.phoneno,
+                    Postalcode=Input.Postalcode,
+                    CompanyId = Input.CompanyId,
+                    Role = Input.Role
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+
+
+                };
+
+                //await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                //await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Admin))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Company))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Company));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Employee))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee));
+                    }
+                    if (!await _roleManager.RoleExistsAsync(SD.Role_Individual))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(SD.Role_Individual));
+                    }
+                    await _userManager.AddToRoleAsync(user, SD.Role_Admin);
+                    if (Input.Role == null && Input.CompanyId == null)
+                    {
+                        await _userManager.AddToRoleAsync(user, SD.Role_Individual);
+                    }
+                    else
+                    {
+                        if (Input.CompanyId > 0)
+                        {
+                            await _userManager.AddToRoleAsync(user, SD.Role_Company);
+                        }
+                        else
+                        {
+                            await _userManager.AddToRoleAsync(user, Input.Role);
+                        }
+                    }
                     //var userId = await _userManager.GetUserIdAsync(user);
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
