@@ -191,7 +191,7 @@ namespace class_project__class.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.Role_Individual));
                     }
-                    await _userManager.AddToRoleAsync(user, SD.Role_Admin);
+                  //  await _userManager.AddToRoleAsync(user, SD.Role_Admin);
                     if (Input.Role == null && Input.CompanyId == null)
                     {
                         await _userManager.AddToRoleAsync(user, SD.Role_Individual);
