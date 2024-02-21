@@ -19,6 +19,17 @@ builder.Services.AddRazorPages();
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //.AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+//builder.Services.AddAuthentication().AddGoogle(option =>
+//{
+//    option.ClientId = "763304459898-5ig9p0ep3lbor980osaom92sim5mav0f.apps.googleusercontent.com";
+//    option.ClientSecret = "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";
+//});
+builder.Services.AddSession(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(30);
+    option.Cookie.HttpOnly = true;
+    option.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -38,6 +49,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

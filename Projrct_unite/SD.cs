@@ -18,5 +18,7 @@ namespace Projrct_unite
         public const string Role_Employee = "Employee";
         public const string Role_Company = "company";
         public const string Role_Individual = "Individual";
+
+        public const string Ss_cartSessionCount = "CartCountSession";
     }
 }

@@ -1,5 +1,6 @@
 ﻿@using Projrct_unite
-
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 
 
 <!DOCTYPE html>
@@ -73,6 +74,23 @@
  *@
 
                                 </div>
+                            </li>
+                        }
+                        @if (httpContextAccessor.HttpContext.Session.GetInt32(SD.Ss_cartSessionCount) != null && httpContextAccessor.HttpContext.Session.GetInt32(SD.Ss_cartSessionCount) != 0)
+                        {
+                            var count = httpContextAccessor.HttpContext.Session.GetInt32(SD.Ss_cartSessionCount);
+                            <li>
+                                <a asp-controller="cart" asp-action="Index" class="nav-link text-white">
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;(@count)
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="nav-link text-white">
+                                    <i class="fas fa-shopping-cart"></i>&nbsp;(0)
+                                </a>
                             </li>
                         }
                     </ul>
