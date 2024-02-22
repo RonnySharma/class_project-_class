@@ -20,5 +20,20 @@ namespace Projrct_unite
         public const string Role_Individual = "Individual";
 
         public const string Ss_cartSessionCount = "CartCountSession";
+        public static double GetPriceBasedOnQuantity(double Quantity, double Price, double Price50, double Price100)
+        {
+            if (Quantity < 50)
+            {
+                return Price;
+            }
+            else if (Quantity < 100)
+            {
+                return Price50;
+            }
+            else
+            {
+                return Price100;
+            }
+        }
     }
 }
